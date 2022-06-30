@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { RootState, Dispatch } from './store'
+import { useSelector, useDispatch} from 'react-redux'
+import Actions from './components/Actions';
+import UnreadMails from './components/UnreadMails';
+import SavedMails from './components/SavedMails';
 
 function App() {
+
+  const { unreadMails, savedMails, removedMails } = useSelector((state: RootState) => state.Mail);
+  const dispatch = useDispatch<Dispatch>();
+
+  useEffect(()=> {
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='w-full h-full'>
+        <div className="container mx-auto main">
+            <Actions/>
+            <UnreadMails/>
+            <SavedMails/>
+        </div>
+      </div>
+    </>
+     
   );
 }
 
